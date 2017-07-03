@@ -1,6 +1,6 @@
 ---
 title: Hexo 个人博客
-date: 2017-05-30 12:30:02
+date: 2017-05-30 11:30:00
 categories:
 - other
 tags:
@@ -8,7 +8,6 @@ tags:
 ---
 
 # Hexo 个人博客
-
 ## 简介
 Hexo是基于**Node.js**的静态博客框架，简单、轻量，其生成的静态网页可以托管在**Github**。
 使用 `GitHubPages` + `Hexo`，一种简单高效的实现方式来搭建个人的博客。
@@ -16,7 +15,6 @@ Hexo是基于**Node.js**的静态博客框架，简单、轻量，其生成的�
 <!-- more -->
 
 ## 环境准备
-
 ### 安装node.js
 去[nodejs](https://nodejs.org/en/download/)官网下载对应系统的安装包，按提示安装。
 
@@ -31,7 +29,6 @@ brew install node
 希望下载最新的可以去[git官网下载](https://git-scm.com/download)
 
 ### 安装hexo
-
 使用npm安装
 
 ```shell
@@ -84,7 +81,6 @@ openssl: 1.0.2k
 3. hexo --silent 简洁模式，隐藏终端信息
 
 ## 主题设置
-
 [hexo 提供很多主题](https://hexo.io/themes/)
 
 这里选了一个极简的主题[NexT](https://github.com/iissnan/hexo-theme-next)，也是Hexo主题中最受欢迎的一个。
@@ -117,7 +113,6 @@ hexo s --debug
 使用浏览器访问 [http://localhost:4000](http://localhost:4000)，检查站点是否正确运行。
 
 ### 主题设定
-
 #### 基础配置
 
 ```
@@ -200,7 +195,6 @@ auto_excerpt:
 或在文章中使用 <!-- more --> 手动进行截断，Hexo 提供的方式（推荐）
 
 #### 代码高亮
-
 NexT 使用 [Tomorrow Theme](https://github.com/chriskempson/tomorrow-theme) 作为代码高亮，共有5款主题供你选择。 NexT 默认使用的是 白色的 normal 主题，可选的值有 `normal`，`night`， `night blue`， `night bright`， `night eighties`。
 
 可更改 `highlight_theme` 字段

@@ -1,6 +1,6 @@
 ---
 title: Hexo 优化和备份
-date: 2017-05-30 12:30:02
+date: 2017-06-1 12:30:02
 categories:
 - other
 tags:
@@ -8,7 +8,6 @@ tags:
 ---
 
 # Hexo 优化和备份
-
 ## gulp精简博客代码
 `Next` 主题在 `Hexo` 引擎解析 `md` 时生成的代码会包含大量的无用空白。这些空白会增加文档的大小,使得网站在响应上不够迅速,影响体验。
 使用的 `gulp` 是一个前端项目构建工具,用自动化构建工具增强你的工作流程[gulp中文官网](http://www.gulpjs.com.cn/)。
@@ -57,7 +56,6 @@ npm install [plugins-name] --save
 上述命令安装插件的同时也会把插件作为项目依赖写入package.json文件.
 
 #### gulp API
-
 ##### gulp.src（gobs[, options])
 > 输出（Emits）符合所提供的匹配模式（glob）或者匹配模式的数组（array of globs）的文件。 将返回一个 [Vinyl files](https://github.com/gulpjs/vinyl-fs) 的 [stream](https://nodejs.org/api/stream.html) 它可以被 [piped](https://nodejs.org/api/stream.html#stream_readable_pipe_destination_options) 到别的插件中。
 
@@ -246,13 +244,11 @@ gulp.task('default', ['build']);
 
 ```shell
 gulp
-hexo d
 ```
 
 但是每次都要把 `public` 中的文件都删除，重新生成静态文件并发布会比较慢，先记下这个问题，以后解决。
 
 ## hexo备份
-
 ### 备份
 新建仓库 `blog` 来存储博客原始文件，先看一下哪些文件是必须备份的：
 像站点配置 `_config.yml`，主题 `theme`，博客文件 `source`，文章的模板 `caffolds`，安装包 `package.json`， 提交忽略配置 `.gitignore` 这些文件是需要备份的。其它可以不需要，则 `.gitignore` 如下配置(已经配置好了):
@@ -288,7 +284,6 @@ hexo g -d  #发布
 ```
 
 ### 还原
-
 使用 `clone`  拷贝仓库
 
 ```
