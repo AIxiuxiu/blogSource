@@ -13,7 +13,9 @@ tags:
 `Next` 主题在 `Hexo` 引擎解析 `md` 时生成的代码会包含大量的无用空白。这些空白会增加文档的大小,使得网站在响应上不够迅速,影响体验。
 使用的 `gulp` 是一个前端项目构建工具,用自动化构建工具增强你的工作流程[gulp中文官网](http://www.gulpjs.com.cn/)。
 
-### gulp
+<!-- more -->
+
+### gulp简介
 首先是 `gulp` 的一些简单介绍：
 gulp是基于**nodejs**流的自动化构建工具，可以快速构建项目并减少频繁的I/0操作。你可以利用gulp插件完成各种自动化任务：测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。
 
@@ -172,8 +174,8 @@ gulp.task("minify-js",function() {
 gulp.task("minify-html",function() {
     return gulp.src("public/**/*.html")
     .pipe(plugins.htmlmin({
-    		removeComments: true,
-    		collapseWhitespace: true,
+        removeComments: true,
+        collapseWhitespace: true,
         minifyJS: true,
         minifyCSS: true,
         minifyURLs: true,
@@ -206,7 +208,22 @@ gulp.task('generate', function(cb) {
     }).then(function() {
         return cb()
     }).catch(function(err) {
-        console.log(err);
+        hexo.exit(err);
+        return cb(err);
+    })
+});
+
+// 利用Hexo API 来发布博客， 效果和在命令行运行： hexo d 一样
+gulp.task('deploy', function(cb) {
+    hexo.init().then(function() {
+        return hexo.call('deploy', {
+            watch: false
+        });
+    }).then(function() {
+        return hexo.exit();
+    }).then(function() {
+        return cb()
+    }).catch(function(err) {
         hexo.exit(err);
         return cb(err);
     })
@@ -219,13 +236,13 @@ gulp.task('minify', function(cb) {
 
 // 执行顺序： 清除public目录 -> 产生原始博客内容 -> 执行压缩混淆
 gulp.task('build', function(cb) {
-    runSequence('clean', 'generate', 'minify', cb)
+    runSequence('clean', 'generate', 'minify', 'deploy', cb)
 });
 
 gulp.task('default', ['build']);
 ```
 
-到这里对 `gulp` 的配置就完成了，只需要每次在执行 `deploy` 命令同步到服务器前执行 `gulp` 就可以生成静态文件并实现对静态资源的压缩。
+到这里对 `gulp` 的配置就完成了，只需要每次在执行 `gulp` 就可以生成静态文件并实现发布。
 
 ```shell
 gulp
@@ -238,7 +255,7 @@ hexo d
 
 ### 备份
 新建仓库 `blog` 来存储博客原始文件，先看一下哪些文件是必须备份的：
-像站点配置 `_config.yml`，主题 `theme`，博客文件 `source`，文章的模板 `caffolds`，安装包 `package.json`， 提交忽略配置 `.gitignore` 这些文件是需要备份的。其它可以不需要，则 `.gitignore` 如下配置。
+像站点配置 `_config.yml`，主题 `theme`，博客文件 `source`，文章的模板 `caffolds`，安装包 `package.json`， 提交忽略配置 `.gitignore` 这些文件是需要备份的。其它可以不需要，则 `.gitignore` 如下配置(已经配置好了):
 
 ```tex
 .DS_Store
@@ -250,10 +267,50 @@ public/
 .deploy*/
 ```
 
+直接在博客顶层目录使用以下命令：
+
+```shell
+git init
+git add -A
+git commit -m "first commit"
+git remote add origin git@github.com:yourName/blog.git
+git push -u origin master
+```
+
+这样就把博客备份到仓库中了。
+在本地对博客进行修改（添加新博文、修改样式等等）后，通过下面的流程进行备份和发布：
+
+```shell
+git add .
+git commit -m "..."
+git push   #备份
+hexo g -d  #发布
+```
+
+### 还原
+
+使用 `clone`  拷贝仓库
+
+```
+git init 
+git clone git@github.com:yourName/blog.git
+```
+
+在本地新拷贝的文件夹下通过以下命令：
+
+```
+cd blog
+npm install #模块安装
+hexo s -g  #预览
+```
+
+**注**：这里没用 `hexo init` 初始化 此时用了 `hexo init`，则站点的配置文件 `_config.yml` 里面内容会被清空使用默认值，所以**不要用 `hexo init`**。
+
+预览[http://localhost:4000/](http://localhost:4000/)没有问题，就可以使用了。
 
 
 ## 参考链接
 [gulp中文官网](http://www.gulpjs.com.cn/)
 [优化Hexo博客 - 压缩 HTML、CSS、JS、IMG 等](https://www.karlzhou.com/articles/compress-minify-hexo/)
 [hexo api](https://hexo.io/zh-cn/api/index.html)
-
+[知乎 CrazyMilk 和 skycrown 的回答](https://www.zhihu.com/question/21193762)
