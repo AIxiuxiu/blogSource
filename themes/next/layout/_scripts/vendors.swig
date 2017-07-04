@@ -27,5 +27,9 @@
 
 {% for name, internal in js_vendors %}
   {% set internal_script = url_for(theme.vendors._internal) + '/' + internal %}
-  <script type="text/javascript" src="{{ theme.vendors[name] | default(internal_script) }}"></script>
+  	{% if name === 'canvas_nest' %}
+  		<script type="text/javascript" color="135,218,255" opacity="0.6" count="66" src="{{ theme.vendors[name] | default(internal_script) }}"></script>
+  	{% else %}
+  		<script type="text/javascript" src="{{ theme.vendors[name] | default(internal_script) }}"></script>
+  	{% endif %}
 {% endfor %}

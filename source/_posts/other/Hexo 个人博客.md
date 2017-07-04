@@ -218,6 +218,19 @@ canvas_nest: true //开启动画
 canvas_nest: false //关闭动画
 ```
 
+改变 `canvas` 动画的配置 打开 `layout/_scripts/vendors.swig` 文件，根据[canvas-nest.js文档](https://github.com/hustcc/canvas-nest.js)进行如下更改：
+
+```tex
+{% for name, internal in js_vendors %}
+  {% set internal_script = url_for(theme.vendors._internal) + '/' + internal %}
+    {% if name === 'canvas_nest' %}
+      <script type="text/javascript" color="135,218,255" opacity="0.6" count="66" src="{{ theme.vendors[name] | default(internal_script) }}"></script>
+    {% else %}
+      <script type="text/javascript" src="{{ theme.vendors[name] | default(internal_script) }}"></script>
+    {% endif %}
+{% endfor %}
+```
+
 #### 背景图片 
 要添加背景图片，首先将图片 `background.jpg` 放到 `/source/uploads/` 目录下，然后，在文件 `/css/_custom/custom.styl`文件中添加下面一行内容：
 
