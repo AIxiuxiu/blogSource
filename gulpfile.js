@@ -46,7 +46,7 @@ gulp.task('minify-images', function() {
        interlaced: true, //类型：Boolean 默认：false 隔行扫描gif进行渲染
        multipass: true, //类型：Boolean 默认：false 多次优化svg直到完全优化
     }))
-    .pipe(gulp.dest('./public/uploads'));
+    .pipe(gulp.dest('./public'));
 });
 
 
