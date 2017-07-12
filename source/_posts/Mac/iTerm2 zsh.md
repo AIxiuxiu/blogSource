@@ -65,6 +65,7 @@ sudo rm /private/var/log/asl/*.asl
 #### nvm
 `. "$NVM_DIR/nvm.sh"` 会拖慢了终端的启动。
 解决方案 [issue#860](https://github.com/creationix/nvm/issues/860) 使用 `--no-use` 和 手动指定默认 `node` 路径来加快执行速度
+默认路径可以通过 `nvm which default` 获取
 
 ```shell
 export NVM_DIR="$HOME/.nvm"
