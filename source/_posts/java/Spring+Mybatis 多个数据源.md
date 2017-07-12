@@ -10,7 +10,7 @@ tags:
 # Spring+Mybatis 多个数据源
 一般我们都会一个项目只用一个 `DB`，但是也有特殊情况，可能会使用到多个 `DB`。下面是 `Spring MVC + Mybatis` 下的多数据源配置。
 
-##配置
+## 配置
 ### 继承AbstractRoutingDataSource
 `AbstractRoutingDataSource` 是spring提供的一个多数据源抽象类。spring会在使用事务的地方来调用此类的 `determineCurrentLookupKey()` 方法来获取数据源的key值。我们继承此抽象类并实现此方法：
 <!-- more -->
