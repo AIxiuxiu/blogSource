@@ -258,7 +258,7 @@ alias jdk7="export JAVA_HOME=$JAVA_7_HOME”
 alias jdk8="export JAVA_HOME=$JAVA_8_HOME"
 ```
 
-## tomcat报错解决
+### tomcat报错解决
 启动失败，在 `catalina.2017-06-28.log` 报如下面的错误
 
 ```
