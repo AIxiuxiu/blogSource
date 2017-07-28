@@ -7,8 +7,8 @@ tags:
 - nvm
 - node
 ---
-# nvm 
 
+# nvm 
 管理 node 版本，[nvm 地址](https://github.com/creationix/nvm#install-script)
 
 ##安装 

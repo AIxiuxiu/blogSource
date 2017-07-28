@@ -7,6 +7,7 @@ tags:
 - Spring
 - Mybatis
 ---
+
 # Spring+Mybatis 多个数据源
 一般我们都会一个项目只用一个 `DB`，但是也有特殊情况，可能会使用到多个 `DB`。下面是 `Spring MVC + Mybatis` 下的多数据源配置。
 

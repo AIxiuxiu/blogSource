@@ -7,6 +7,7 @@ tags:
 - plugin
 - zsh
 ---
+
 # oh-my-zsh 插件
 `oh-my-zsh` 自带很多插件，有兴趣可以看[wiki的插件介绍](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins)
 
