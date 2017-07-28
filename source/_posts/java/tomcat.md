@@ -28,7 +28,9 @@ export PATH=$PATH:/Users/yourname/Library/tomcat/bin
 ```
 startup.sh
 ```
+
 <!-- more -->
+
 打开 [http://localhost:8080](http://localhost:8080) 验证tomcat是否安装成功
 ![屏幕快照 2017-07-27 下午4.23.05](http://oimhz3xpl.bkt.clouddn.com/屏幕快照 2017-07-27 下午4.23.05.png)
 
@@ -180,7 +182,7 @@ Manager 的四个管理角色：
 
 ```
 <Context reloadable="false" />
-``` 
+```
 
 其中 `docBase` 不用写了，因为在下一个文本框中填入。或者更简单点，这个文本框什么都不填，在 WAR or Directory URL: 中键入 /user/yourname/work/hello.war 即可，然后点击 Deploy 按钮，上面就可以看到了 web 应用程序，名字就 `Context Path(required)` 中的名字。
      
@@ -207,7 +209,7 @@ tail  -f catalina.out
 
 ```
 scp /path/filename username@servername:/path 
-```  
+```
 
 复制目录到服务器使用 `scp -r `
 
