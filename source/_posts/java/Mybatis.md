@@ -7,7 +7,7 @@ tags:
 - Mybatis
 ---
 
-# Mybatis 
+# Mybatis
 ## Mapper XML
 ### select
 查询语句是 `MyBatis` 中最常用的元素之一，每个插入、更新或删除操作，通常对应多个查询操作。这是 `MyBatis` 的基本原则之一，也是将焦点和努力放到查询和结果映射的原因。简单查询的 `select` 查询是非常简单的。比如：
@@ -17,7 +17,7 @@ tags:
   SELECT * FROM PERSON WHERE ID = #{id}
 </select>
 ```
-
+<!-- more -->
 这个语句被称作 `selectPerson`，接受一个 `int`（或 `Integer`）类型的参数，并返回一个 `HashMap` 类型的对象，其中的键是列名，值便是结果行中的对应值。
 
 注意参数符号： **#{id}**
@@ -101,7 +101,7 @@ insert 元素有很多属性,具体查看[属性列表](#property)
 ```xml
 <insert id="insertAuthor">
   <selectKey keyProperty="id" resultType="int" order="BEFORE">
-    select STOCKIDSEQUENCE.NEXTVAL as id from DUAL 
+    select STOCKIDSEQUENCE.NEXTVAL as id from DUAL
   </selectKey>
   insert into Author
     (id, username, password, email)
@@ -221,8 +221,8 @@ insert 元素有很多属性,具体查看[属性列表](#property)
 ```xml
 <select id="findActiveBlogWithTitleLike"
      resultType="Blog">
-  SELECT * FROM BLOG 
-  WHERE state = ‘ACTIVE’ 
+  SELECT * FROM BLOG
+  WHERE state = ‘ACTIVE’
   <if test="title != null">
     AND title like #{title}
   </if>
@@ -260,11 +260,11 @@ insert 元素有很多属性,具体查看[属性列表](#property)
 ```xml
 <select id="findActiveBlogLike"
      resultType="Blog">
-  SELECT * FROM BLOG 
-  <where> 
+  SELECT * FROM BLOG
+  <where>
     <if test="state != null">
          state = #{state}
-    </if> 
+    </if>
     <if test="title != null">
         AND title like #{title}
     </if>
@@ -279,12 +279,12 @@ insert 元素有很多属性,具体查看[属性列表](#property)
 
 ```xml
 <trim prefix="WHERE" prefixOverrides="AND |OR ">
-  ... 
+  ...
 </trim>
 ```
 
-`prefix` 内容之前加的前缀 
-`suffix` 内容之后加的后缀 
+`prefix` 内容之前加的前缀
+`suffix` 内容之后加的后缀
 `prefixOverrides` 属性会忽略通过管道分隔的文本序列（注意此例中的**空格**也是必要的）。它带来的结果就是所有在 `prefixOverrides` 属性中指定的内容将被移除，并且插入 `prefix` 属性中指定的内容。
 
 当在 `update` 语句中使用 `<if>` 标签时，如果前面的 `<if>` 没有执行，则或导致逗号多余错误。使用 `<set>` 标签可以将动态的配置 `SET` 关键字，和剔除追加到条件末尾的任何不相关的逗号。
@@ -375,11 +375,11 @@ insert 元素有很多属性,具体查看[属性列表](#property)
 用法和之前的基本相同，但是需要注意传入的参数是 `map` 类型。
 
 ```xml
-<update id="batchUpdateStudentWithMap" parameterType="java.util.Map" >  
-    UPDATE STUDENT SET name = #{name} WHERE id IN   
-    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">   
-        #{item}   
-    </foreach>  
+<update id="batchUpdateStudentWithMap" parameterType="java.util.Map" >
+    UPDATE STUDENT SET name = #{name} WHERE id IN
+    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>
 </update>
 ```
 
@@ -403,12 +403,12 @@ MySQL 没有提供直接的方法来实现批量更新，但可以使用 `case` 
 
 ```sql
 UPDATE course
-    SET name = CASE id 
+    SET name = CASE id
         WHEN 1 THEN 'name1'
         WHEN 2 THEN 'name2'
         WHEN 3 THEN 'name3'
-    END, 
-    title = CASE id 
+    END,
+    title = CASE id
         WHEN 1 THEN 'New Title 1'
         WHEN 2 THEN 'New Title 2'
         WHEN 3 THEN 'New Title 3'
@@ -458,24 +458,24 @@ WHERE id IN (1,2,3)
 --MySql
 SELECT * FROM user WHERE name like CONCAT('%',#{name},'%')
 --Oracle
-SELECT * FROM user WHERE name like CONCAT('%',#{name},'%') 或 
+SELECT * FROM user WHERE name like CONCAT('%',#{name},'%')
 SELECT * FROM user WHERE name like '%'||#{name}||'%'
 --SQLServer
 SELECT * FROM user WHERE name like '%'+#{name}+'%'
 --DB2
-SELECT * FROM user WHERE name like CONCAT('%',#{name},'%') 或  
+SELECT * FROM user WHERE name like CONCAT('%',#{name},'%')
 SELECT * FROM user WHERE name like '%'||#{name}||'%'
 ```
 
-或者
+或者使用bind
 
 ```xml
-<select id="selectPersons" resultType="person" parameterType="person">  
-  <bind name="pattern" value="'%' + _parameter.username + '%'" />  
-  select id,sex,age,username,password   
-  from person  
-  where username LIKE #{pattern}  
-</select> 
+<select id="selectPersons" resultType="person" parameterType="person">
+  <bind name="pattern" value="'%' + _parameter.username + '%'" />
+  select id,sex,age,username,password
+  from person
+  where username LIKE #{pattern}
+</select>
 ```
 
 ### #{} 和 ${}
@@ -495,12 +495,12 @@ public List<User> findUsers(@Param("offset") int offset, @Param("count") int cou
 ```
 
 ### CDATA
-术语 `CDATA` 指的是不应由 XML 解析器进行解析的文本数据（Unparsed Character Data）。 
-在 `XML` 元素中，”<” 和 “&” 是非法的。 
+术语 `CDATA` 指的是不应由 XML 解析器进行解析的文本数据（Unparsed Character Data）。
+在 `XML` 元素中，”<” 和 “&” 是非法的。
 
-* “<” 会产生错误，因为解析器会把该字符解释为新元素的开始。 
+* “<” 会产生错误，因为解析器会把该字符解释为新元素的开始。
 * “&” 也会产生错误，因为解析器会把该字符解释为字符实体的开始。
- 
+
 某些文本，比如 `JavaScript` 代码，包含大量 "<" 或 "&" 字符。为了避免错误，可以将脚本代码定义为 `CDATA`。
 `CDATA` 部分中的所有内容都会被解析器忽略。
 `CDATA` 部分由 `<![CDATA[` 开始，由 `]]>` 结束：
@@ -511,5 +511,3 @@ public List<User> findUsers(@Param("offset") int offset, @Param("count") int cou
 [mybatis](http://www.mybatis.org/mybatis-3/zh/getting-started.html
 )
 [Mybatis 语法](https://xtuer.github.io/spring-web-mybatis-syntax/)
-
-
